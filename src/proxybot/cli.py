@@ -35,13 +35,13 @@ def unpack_optional[T](opt: Optional[T]) -> T:
     return opt
 
 
-GROUP_CHATID = unpack_optional(os.environ.get("BOT_GROUPID"))
+GROUP_CHATID = int(unpack_optional(os.environ.get("BOT_GROUPID")))
 TOKEN = unpack_optional(os.environ.get("BOT_TOKEN"))
 
 USER_MESSAGE_FILTER = (
     filters.ALL
     & (~filters.COMMAND)
-    & (~filters.Chat(int(GROUP_CHATID)))
+    & (~filters.Chat(GROUP_CHATID))
     & filters.ChatType.PRIVATE
 )
 
